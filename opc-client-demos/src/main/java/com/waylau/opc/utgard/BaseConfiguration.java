@@ -15,14 +15,14 @@ public final class BaseConfiguration {
 	private final static ConnectionInformation ci;
 	private final static Properties prop;
 
-	public final static String CONFIG_USERNAME = "username";
-	public final static String CONFIG_PASSWORD = "password";
-	public final static String CONFIG_HOST = "host";
-	public final static String CONFIG_DOMAIN = "domain";
-	public final static String CONFIG_CLSID = "clsid";
-	public final static String CONFIG_PROGID = "progid";
-
-	private final static String CONFIG_FILE_NAME = "config.properties";
+	public final static String CONFIG_USERNAME = "opc.username";
+	public final static String CONFIG_PASSWORD = "opc.password";
+	public final static String CONFIG_HOST = "opc.host";
+	public final static String CONFIG_DOMAIN = "opc.domain";
+	public final static String CONFIG_CLSID = "opc.clsid";
+	public final static String CONFIG_PROGID = "opc.progid";
+	public final static String CONFIG_ITEMS = "opc.items";
+	private final static String CONFIG_FILE_NAME = "opc.properties";
 
 	/**
 	 * 加载配置文件
@@ -80,5 +80,19 @@ public final class BaseConfiguration {
 		ci.setDomain(prop.getProperty(CONFIG_DOMAIN));
 		ci.setUser(prop.getProperty(CONFIG_USERNAME));
 		ci.setPassword(prop.getProperty(CONFIG_PASSWORD));
+	}
+	
+	/**
+	 * 获取要采集数据项的名称列表
+	 * @return
+	 */
+	public static String[]  getItems() {
+		String[] items = null;
+		String sArray = prop.getProperty(CONFIG_ITEMS);
+		if(sArray.length()>0){
+			items = sArray.split(",");
+		}
+
+		return items;
 	}
 }
